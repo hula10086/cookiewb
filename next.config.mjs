@@ -6,6 +6,9 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  experimental: {
+    staticPageGenerationTimeout: 180,
+  },
 };
 
 export default nextConfig;
