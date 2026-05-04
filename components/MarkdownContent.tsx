@@ -28,6 +28,26 @@ function parseMarkdown(content: string): JSX.Element[] {
       continue
     }
 
+    // Mermaid diagram
+    if (line.startsWith("```mermaid")) {
+      const diagramLines: string[] = []
+      i++
+      while (i < lines.length && !lines[i].startsWith("```")) {
+        diagramLines.push(lines[i])
+        i++
+      }
+      i++
+      elements.push(
+        <div key={getKey()} className="mermaid-container">
+          <div className="text-xs text-muted-foreground mb-2 font-mono">Mermaid Diagram</div>
+          <pre className="text-sm text-foreground/80 overflow-x-auto">
+            {diagramLines.join("\n")}
+          </pre>
+        </div>
+      )
+      continue
+    }
+
     // Code block
     if (line.startsWith("```")) {
       const lang = line.slice(3).trim()
@@ -142,26 +162,6 @@ function parseMarkdown(content: string): JSX.Element[] {
     if (line.match(/^---+$/)) {
       elements.push(<hr key={getKey()} className="my-8 border-border" />)
       i++
-      continue
-    }
-
-    // Mermaid diagram placeholder
-    if (line.startsWith("```mermaid")) {
-      const diagramLines: string[] = []
-      i++
-      while (i < lines.length && !lines[i].startsWith("```")) {
-        diagramLines.push(lines[i])
-        i++
-      }
-      i++
-      elements.push(
-        <div key={getKey()} className="mermaid-container">
-          <div className="text-xs text-muted-foreground mb-2 font-mono">Mermaid Diagram</div>
-          <pre className="text-sm text-foreground/80 overflow-x-auto">
-            {diagramLines.join("\n")}
-          </pre>
-        </div>
-      )
       continue
     }
 

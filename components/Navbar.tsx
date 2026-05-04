@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, motionValue } from "framer-motion"
 import { BookOpen, Github, Heart } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import SearchDialog from "@/components/SearchDialog"
@@ -12,13 +12,19 @@ export default function Navbar() {
   const { scrollY } = useScroll()
   const headerOpacity = useTransform(scrollY, [0, 100], [0, 1])
 
+  const scrollProgress = motionValue(0)
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      if (docHeight > 0) {
+        scrollProgress.set((window.scrollY / docHeight) * 100)
+      }
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [scrollProgress])
 
   return (
     <motion.header
@@ -63,7 +69,7 @@ export default function Navbar() {
       <motion.div
         className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
         style={{
-          width: useTransform(scrollY, [0, document?.body?.scrollHeight - window?.innerHeight || 1000], ["0%", "100%"]),
+          width: useTransform(scrollProgress, [0, 100], ["0%", "100%"]),
         }}
       />
     </motion.header>
