@@ -6,6 +6,7 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  basePath: '/cookiewb',
 };
 
 export default nextConfig;
