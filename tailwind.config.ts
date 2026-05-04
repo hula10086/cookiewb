@@ -79,7 +79,7 @@ const config: Config = {
         },
         "blink-caret": {
           "from, to": { borderColor: "transparent" },
-          "50%": { borderColor": "hsl(var(--primary))" },
+          "50%": { borderColor: "hsl(var(--primary))" },
         },
       },
     },
