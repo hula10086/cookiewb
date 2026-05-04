@@ -80,9 +80,14 @@
     @apply prose-table:w-full prose-table:border-collapse;
     @apply prose-th:border prose-th:border-border prose-th:p-3 prose-th:bg-muted prose-th:text-left prose-th:font-semibold;
     @apply prose-td:border prose-td:border-border prose-td:p-3;
-    @apply prose-tr:nth-child(even):bg-muted/30;
-    @apply prose-tr:hover:bg-muted/50;
     @apply prose-img:rounded-lg prose-img:shadow-lg;
+  }
+
+  .prose-custom tr:nth-child(even) {
+    @apply bg-muted/30;
+  }
+  .prose-custom tr:hover {
+    @apply bg-muted/50;
   }
 }
 
