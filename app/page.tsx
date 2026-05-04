@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
-import { chapters, docMeta } from "@/lib/content"
+import { chapters } from "@/lib/content"
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-8 py-12">
+      <div id="docs-content" className="max-w-4xl mx-auto px-4 sm:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
